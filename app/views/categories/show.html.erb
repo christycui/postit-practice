@@ -1,0 +1,5 @@
+<%= render 'shared/content_title', title: 'All Posts  ', sub_title: '>>  ' + @category.name %>
+
+<% @category.posts.each do |post| %>
+  <%= render 'posts/post', post: post %>
+<% end %>

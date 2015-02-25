@@ -1,5 +1,5 @@
 <%= render 'shared/content_title', title: @post.title %>
-
+<%= render @post.categories %>
 <div class="well well-lg">
   <p align='right'>[<%= link_to 'edit', edit_post_path(@post) %>]</p>
   <p><%= link_to 'link', format_url(@post.url) %></p>

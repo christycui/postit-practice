@@ -1,0 +1,15 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= link_to post.title, post_path(post) %></h3>
+    <% post.categories.each do |cate| %>
+    <%= render post.categories %>
+    <% end %>
+    <p class='panel-title' align='right'>[<%= link_to 'edit', edit_post_path(post) %>]</p>
+  </div>
+  <div class="panel-body">
+    <p><%= link_to 'link', format_url(post.url), html_options = {target: "_blank"} %></p>
+    <p><%= post.description %></p>
+    <br/>
+    <small>Posted by <%= post.user.username %> at <%= post.created_at %></small>
+  </div>
+</div>

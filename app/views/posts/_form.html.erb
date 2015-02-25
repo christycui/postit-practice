@@ -20,8 +20,8 @@
       <%= f.text_area :description, rows: 10 %>
     </div>
 
-    <div class='form-group'>
-      <%= f.submit(@post.new_record? ? 'Create Post' : 'Update Post', class: 'btn btn-primary') %>
-    </div>
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    <%= f.submit(@post.new_record? ? 'Create Post' : 'Update Post', class: 'btn btn-primary') %>
+
   <% end %>
 </div>
