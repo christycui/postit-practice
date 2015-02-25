@@ -1,0 +1,10 @@
+<%= render 'shared/content_title', title: @post.title %>
+
+<div class="well well-lg">
+  <p align='right'>[<%= link_to 'edit', edit_post_path(@post) %>]</p>
+  <p><%= link_to 'link', format_url(@post.url) %></p>
+  <p><%= @post.description %></p>
+  <br/>
+  <small>Posted by <%= @post.user.username %> at <%= @post.created_at %> // Updated at <%= @post.updated_at %></small>
+  
+</div>
