@@ -1,0 +1,23 @@
+<%= render 'shared/content_title', title: 'Profile: ', sub_title: @user.username %>
+<div class='well'>
+  <div class='form-group'>
+    Username: <%= @user.username %>
+  </div>
+  <div class='form-group'>
+    Password: [masked]
+  </div>
+  <div class='form-group'>
+    Time-zone: <%= @user.time_zone %>
+  </div>
+</div>
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active" data-toggle='tab'><a href="#posts">Posts</a></li>
+  <li role="presentation" data-toggle='tab'><a href="#">Comments</a></li>
+</ul>
+
+<div id='posts'>
+  <% @user.posts.each do |post| %>
+    <%= render 'posts/post', post: post %>
+  <% end %>
+</div>

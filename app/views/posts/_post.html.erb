@@ -10,6 +10,6 @@
     <p><%= link_to 'link', format_url(post.url), html_options = {target: "_blank"} %></p>
     <p><%= post.description %></p>
     <br/>
-    <small>Posted by <%= post.user.username %> at <%= post.created_at %></small>
+    <small>Posted by <%= link_to post.user.username, user_path(post.user) %> at <%= format_time(post.created_at) %></small>
   </div>
 </div>

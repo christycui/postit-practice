@@ -5,6 +5,6 @@
   <p><%= link_to 'link', format_url(@post.url) %></p>
   <p><%= @post.description %></p>
   <br/>
-  <small>Posted by <%= @post.user.username %> at <%= @post.created_at %> // Updated at <%= @post.updated_at %></small>
+  <small>Posted by <%= @post.user.username %> at <%= format_time(@post.created_at) %> // Updated at <%= format_time(@post.updated_at) %></small>
   
 </div>
