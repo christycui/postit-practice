@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   end
   
   def show
+    @comment = Comment.new
   end
   
   def new
@@ -14,7 +15,7 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(post_params)
-    @post.user = User.first #edit after authentication
+    @post.user = current_user
     if @post.save
       flash[:success] = 'Your post is successfully created.'
       redirect_to post_path(@post)

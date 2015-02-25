@@ -1,3 +1,4 @@
+
 <%= render 'shared/content_title', title: @post.title %>
 <%= render @post.categories %>
 <div class="well well-lg">
@@ -5,6 +6,24 @@
   <p><%= link_to 'link', format_url(@post.url) %></p>
   <p><%= @post.description %></p>
   <br/>
-  <small>Posted by <%= @post.user.username %> at <%= format_time(@post.created_at) %> // Updated at <%= format_time(@post.updated_at) %></small>
-  
+  <p><small>Posted by <%= @post.user.username %> at <%= format_time(@post.created_at) %> // Updated at <%= format_time(@post.updated_at) %></small></p>
+  <br/>
+  <% if logged_in? %>
+  <%= form_for [@post, @comment] do |f| %>
+    <%= render 'shared/error_msg', obj: @comment %>
+    <div class='form-group'>
+      <%= f.label :body, 'Leave a comment:' %>
+      <br/>
+      <%= f.text_area :body, rows: 8 %>
+    </div>
+    <%= f.submit 'Comment', class: 'btn btn-primary' %>
+  <% end %>
+  <% end %>
 </div>
+Comments: 
+<% @post.comments.each do |comment| %>
+  <div class='well'>
+    <p><em><%= comment.body %></em></p>
+    <p>by <%= comment.user.username %> at <%= format_time(comment.created_at) %></p>
+  </div>
+<% end %>
