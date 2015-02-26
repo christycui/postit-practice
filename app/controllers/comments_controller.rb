@@ -12,4 +12,15 @@ class CommentsController < ApplicationController
       render 'posts/show'
     end
   end
+  
+   def vote
+     @comment = Comment.find(params[:id])
+     vote = @comment.votes.build(user: current_user, vote: params[:vote])
+    if vote.save
+      flash[:success] = 'Your vote was counted.'
+    else
+      flash[:danger] = 'You already voted on that.'
+    end
+    redirect_to :back
+  end
 end

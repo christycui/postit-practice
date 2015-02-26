@@ -1,0 +1,17 @@
+
+<div class='col-md-1'>
+    <div class='well text-center'>
+        <%= link_to_if logged_in?, '<span class="glyphicon glyphicon-chevron-up"></span>'.html_safe, vote_post_comment_path(comment.post, comment, vote: true), method: 'post' do %>
+<span class="glyphicon glyphicon-chevron-up"></span>
+            <% end %>
+<br/>
+      <%= comment.total_votes %>
+<%= link_to_if logged_in?,'<span class="glyphicon glyphicon-chevron-down"></span>'.html_safe, vote_post_comment_path(comment.post, comment, vote: false), method: 'post' do %>
+<span class="glyphicon glyphicon-chevron-down"></span>
+<% end %>
+</div>
+</div>
+<div class='well col-md-11'>
+<p><em><%= comment.body %></em></p>
+<p>by <%= link_to comment.user.username, user_path(comment.user) %> at <%= format_time(comment.created_at) %></p>
+</div>

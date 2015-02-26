@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
+  before_action :require_creator, only: [:edit]
   def index
     @posts = Post.all
   end
@@ -36,6 +37,16 @@ class PostsController < ApplicationController
     end
   end
   
+  def vote
+    vote = @post.votes.build(user: current_user, vote: params[:vote])
+    if vote.save
+      flash[:success] = 'Your vote was counted.'
+    else
+      flash[:danger] = 'You already voted on that.'
+    end
+    redirect_to :back
+  end
+  
   private
   def post_params
     params.require(:post).permit(:title, :url, :description, :category_ids => [])
@@ -44,4 +55,9 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
+  
+  def require_creator
+    access_denied unless logged_in? && current_user == @post.user
+  end
+  
 end

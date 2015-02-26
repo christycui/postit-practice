@@ -2,11 +2,13 @@
 <%= render 'shared/content_title', title: @post.title %>
 <%= render @post.categories %>
 <div class="well well-lg">
-  <p align='right'>[<%= link_to 'edit', edit_post_path(@post) %>]</p>
+  <% if logged_in? && current_user == @post.user %>
+    <p align='right'>[<%= link_to 'edit', edit_post_path(@post) %>]</p>
+  <% end %>
   <p><%= link_to 'link', format_url(@post.url) %></p>
   <p><%= @post.description %></p>
   <br/>
-  <p><small>Posted by <%= @post.user.username %> at <%= format_time(@post.created_at) %> // Updated at <%= format_time(@post.updated_at) %></small></p>
+  <p><small>Posted by <%= link_to @post.user.username, user_path(@post.user) %> at <%= format_time(@post.created_at) %> // Updated at <%= format_time(@post.updated_at) %></small></p>
   <br/>
   <% if logged_in? %>
   <%= form_for [@post, @comment] do |f| %>
@@ -20,10 +22,5 @@
   <% end %>
   <% end %>
 </div>
-Comments: 
-<% @post.comments.each do |comment| %>
-  <div class='well'>
-    <p><em><%= comment.body %></em></p>
-    <p>by <%= comment.user.username %> at <%= format_time(comment.created_at) %></p>
-  </div>
-<% end %>
+<p>Comments: </p>
+<%= render @post.comments %>

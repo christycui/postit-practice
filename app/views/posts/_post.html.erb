@@ -1,15 +1,31 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= link_to post.title, post_path(post) %></h3>
-    <% post.categories.each do |cate| %>
-    <%= render post.categories %>
+<div class='col-md-1'>
+  <div class='well text-center'>
+    <%= link_to_if logged_in?, '<span class="glyphicon glyphicon-chevron-up"></span>'.html_safe, vote_post_path(post, vote: true), method: 'post' do %>
+      <span class="glyphicon glyphicon-chevron-up"></span>
     <% end %>
-    <p class='panel-title' align='right'>[<%= link_to 'edit', edit_post_path(post) %>]</p>
-  </div>
-  <div class="panel-body">
-    <p><%= link_to 'link', format_url(post.url), html_options = {target: "_blank"} %></p>
-    <p><%= post.description %></p>
     <br/>
-    <small>Posted by <%= link_to post.user.username, user_path(post.user) %> at <%= format_time(post.created_at) %></small>
+    <%= post.total_votes %>
+    <%= link_to_if logged_in?,'<span class="glyphicon glyphicon-chevron-down"></span>'.html_safe, vote_post_path(post, vote: false), method: 'post' do %>
+      <span class="glyphicon glyphicon-chevron-down"></span>
+    <% end %>
+  </div>
+</div>
+<div class='col-md-11'>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title"><%= link_to post.title, post_path(post) %></h3>
+      <% post.categories.each do |cate| %>
+      <%= render post.categories %>
+      <% end %>
+      <% if logged_in? && current_user == post.user %>
+        <p class='panel-title' align='right'>[<%= link_to 'edit', edit_post_path(post) %>]</p>
+      <% end %>
+    </div>
+    <div class="panel-body">
+      <p><%= link_to 'link', format_url(post.url), html_options = {target: "_blank"} %></p>
+      <p><%= post.description %></p>
+      <br/>
+      <small>Posted by <%= link_to post.user.username, user_path(post.user) %> at <%= format_time(post.created_at) %></small>
+    </div>
   </div>
 </div>

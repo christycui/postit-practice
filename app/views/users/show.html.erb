@@ -11,13 +11,26 @@
   </div>
 </div>
 
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active" data-toggle='tab'><a href="#posts">Posts</a></li>
-  <li role="presentation" data-toggle='tab'><a href="#">Comments</a></li>
-</ul>
+<h5>Recent activities: </h5>
 
-<div id='posts'>
-  <% @user.posts.each do |post| %>
-    <%= render 'posts/post', post: post %>
-  <% end %>
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#posts" aria-controls="home" role="tab" data-toggle="tab">Posts</a></li>
+    <li role="presentation"><a href="#comments" aria-controls="profile" role="tab" data-toggle="tab">Comments</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="posts">
+      <% @user.posts.limit(3).each do |post| %>
+        <%= render 'posts/post', post: post %>
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="comments">
+      <%= render @user.comments.limit(3) %>
+    </div>
+  </div>
+
 </div>

@@ -18,4 +18,9 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end
   end
+
+  def access_denied
+    flash[:danger] = "You can't do that."
+    redirect_to :back
+  end
 end

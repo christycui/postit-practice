@@ -1,9 +1,7 @@
 <%= render 'shared/content_title', title: 'All Posts' %>
 
 <div class='row'>
-  <div class='span10'>
-    <% @posts.each do |post| %>
-      <%= render 'post', post: post %>
-    <% end %>
-  </div>
+  <% @posts.each do |post| %>
+  <%= render 'post', post: post %>
+  <% end %>
 </div>
