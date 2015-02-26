@@ -4,7 +4,7 @@
       <span class="glyphicon glyphicon-chevron-up"></span>
     <% end %>
     <br/>
-    <span id='post_<%= post.id %>_votes'><%= post.total_votes %></span>
+    <span id='post_<%= post.to_param %>_votes'><%= post.total_votes %></span>
     <%= link_to_if logged_in?,'<span class="glyphicon glyphicon-chevron-down"></span>'.html_safe, vote_post_path(post, vote: false), method: 'post', remote: true do %>
       <span class="glyphicon glyphicon-chevron-down"></span>
     <% end %>
@@ -14,9 +14,7 @@
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title"><%= link_to post.title, post_path(post) %></h3>
-      <% post.categories.each do |cate| %>
       <%= render post.categories %>
-      <% end %>
       <% if logged_in? && current_user == post.user %>
         <p class='panel-title' align='right'>[<%= link_to 'edit', edit_post_path(post) %>]</p>
       <% end %>

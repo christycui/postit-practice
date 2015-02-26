@@ -1,5 +1,5 @@
 <% if @vote.save %>
-  $('#post_<%= @comment.post.id %>_comment_<%= @comment.id %>_votes').html("<%= @comment.total_votes %>")
+  $('#post_<%= @comment.post.to_param %>_comment_<%= @comment.id %>_votes').html("<%= @comment.total_votes %>")
 <% else %>
   alert("You already voted on that.")
 <% end %>

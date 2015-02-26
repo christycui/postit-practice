@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :require_user, except: [:index, :show]
   before_action :require_creator, only: [:edit]
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by {|x| x.total_votes}.reverse
   end
   
   def show
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
   end
   
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.find_by slug: params[:id]
   end
   
   def require_creator

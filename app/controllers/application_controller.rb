@@ -23,4 +23,6 @@ class ApplicationController < ActionController::Base
     flash[:danger] = "You can't do that."
     redirect_to :back
   end
+  
+
 end
