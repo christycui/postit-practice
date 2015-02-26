@@ -1,11 +1,11 @@
 <div class='col-md-1'>
   <div class='well text-center'>
-    <%= link_to_if logged_in?, '<span class="glyphicon glyphicon-chevron-up"></span>'.html_safe, vote_post_path(post, vote: true), method: 'post' do %>
+    <%= link_to_if logged_in?, '<span class="glyphicon glyphicon-chevron-up"></span>'.html_safe, vote_post_path(post, vote: true), method: 'post', remote: true do %>
       <span class="glyphicon glyphicon-chevron-up"></span>
     <% end %>
     <br/>
-    <%= post.total_votes %>
-    <%= link_to_if logged_in?,'<span class="glyphicon glyphicon-chevron-down"></span>'.html_safe, vote_post_path(post, vote: false), method: 'post' do %>
+    <span id='post_<%= post.id %>_votes'><%= post.total_votes %></span>
+    <%= link_to_if logged_in?,'<span class="glyphicon glyphicon-chevron-down"></span>'.html_safe, vote_post_path(post, vote: false), method: 'post', remote: true do %>
       <span class="glyphicon glyphicon-chevron-down"></span>
     <% end %>
   </div>

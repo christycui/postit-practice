@@ -38,13 +38,18 @@ class PostsController < ApplicationController
   end
   
   def vote
-    vote = @post.votes.build(user: current_user, vote: params[:vote])
-    if vote.save
-      flash[:success] = 'Your vote was counted.'
-    else
-      flash[:danger] = 'You already voted on that.'
+    @vote = @post.votes.build(user: current_user, vote: params[:vote])
+    respond_to do |format|
+      format.html do
+        if @vote.save
+          flash[:success] = 'Your vote was counted.'
+        else
+          flash[:danger] = 'You already voted on that.'
+        end
+        redirect_to :back
+      end
+      format.js
     end
-    redirect_to :back
   end
   
   private
